@@ -49,7 +49,7 @@ jobs:
           tags: |
             ghcr.io/${{ github.repository_owner }}/hfnode:latest
           labels: |
-            org.opencontainers.image.source=https://github.com/${{ steps.vars.outputs.repo_lower }}
+            org.opencontainers.image.source=https://github.com/${{ github.repository_owner }}
             org.opencontainers.image.description=http server
             org.opencontainers.image.licenses=MIT
           cache-from: type=gha
