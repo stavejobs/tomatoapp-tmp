@@ -1,722 +1,760 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>中国夏季旅游Top10 · 清凉一夏</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700;900&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f3ee;
+      --ink: #1a1614;
+      --ink-light: #6b5f57;
+      --accent: #c8402f;
+      --accent-warm: #e8a84c;
+      --muted: #d4ccc5;
+      --card-bg: #fffdfb;
+      --tag-bg: #f0e8df;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans SC', sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(160deg, #e8d5c0 0%, #cde0d8 40%, #b8d4e8 70%, #d4c5e8 100%);
+      opacity: 0.5;
+    }
+
+    .hero-noise {
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 2rem;
+    }
+
+    .hero-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--ink-light);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.2s;
+    }
+
+    .hero-title {
+      font-family: 'Noto Serif SC', serif;
+      font-size: clamp(3rem, 8vw, 7rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.4s;
+    }
+
+    .hero-title .accent-word {
+      color: var(--accent);
+      display: inline-block;
+      transform: translateY(0.3em);
+    }
+
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--ink-light);
+      max-width: 420px;
+      margin: 0 auto 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--ink-light);
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1s;
+    }
+
+    .scroll-hint .arrow {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--ink-light), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+      50% { opacity: 1; transform: scaleY(1); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .intro {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 8rem 2rem;
+      text-align: center;
+    }
+
+    .intro p {
+      font-size: 1.15rem;
+      line-height: 2;
+      color: var(--ink-light);
+    }
+
+    .intro p strong {
+      color: var(--ink);
+      font-weight: 500;
+    }
+
+    .city-list {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem 6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+    }
+
+    .city-card {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .city-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .city-card:nth-child(even) {
+      direction: rtl;
+    }
+
+    .city-card:nth-child(even) > * {
+      direction: ltr;
+    }
+
+    .city-image {
+      position: relative;
+      aspect-ratio: 4/3;
+      overflow: hidden;
+      border-radius: 4px;
+    }
+
+    .city-image-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      transition: transform 0.6s ease;
+    }
+
+    .city-card:hover .city-image-inner {
+      transform: scale(1.05);
+    }
+
+    .city-rank {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      font-family: 'Noto Serif SC', serif;
+      font-size: 4rem;
+      font-weight: 900;
+      color: white;
+      line-height: 1;
+      text-shadow: 0 2px 20px rgba(0,0,0,0.3);
+      z-index: 2;
+    }
+
+    .city-rank::after {
+      content: attr(data-label);
+      display: block;
+      font-size: 0.6rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      opacity: 0.8;
+    }
+
+    .city-info {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .city-header {
+      display: flex;
+      align-items: baseline;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .city-name {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 2.4rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .city-location {
+      font-size: 0.85rem;
+      color: var(--ink-light);
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .city-desc {
+      font-size: 0.95rem;
+      color: var(--ink-light);
+      line-height: 1.85;
+    }
+
+    .city-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tag {
+      background: var(--tag-bg);
+      color: var(--ink);
+      padding: 0.3rem 0.8rem;
+      border-radius: 2rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+    }
+
+    .city-highlights {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .city-highlights li {
+      font-size: 0.88rem;
+      color: var(--ink);
+      padding-left: 1.2rem;
+      position: relative;
+    }
+
+    .city-highlights li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .temp-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      background: linear-gradient(135deg, #e8f4f0, #d4ecf0);
+      color: #2a6b5a;
+      padding: 0.25rem 0.7rem;
+      border-radius: 2rem;
+      font-size: 0.78rem;
+      font-weight: 500;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 5rem 2rem;
+      background: var(--ink);
+      color: rgba(255,255,255,0.5);
+      font-size: 0.8rem;
+    }
+
+    .footer-logo {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 1.5rem;
+      color: rgba(255,255,255,0.9);
+      margin-bottom: 1rem;
+    }
+
+    .footer p { line-height: 2; }
+
+    .divider {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--muted);
+    }
+
+    .divider span {
+      font-family: 'Noto Serif SC', serif;
+      font-size: 2rem;
+      color: var(--muted);
+    }
+
+    .color-1 .city-image-inner { background: linear-gradient(135deg, #ffecd2, #fcb69f); }
+    .color-2 .city-image-inner { background: linear-gradient(135deg, #a1c4fd, #c2e9fb); }
+    .color-3 .city-image-inner { background: linear-gradient(135deg, #d4fc79, #96e6a1); }
+    .color-4 .city-image-inner { background: linear-gradient(135deg, #f5af19, #f12711); }
+    .color-5 .city-image-inner { background: linear-gradient(135deg, #a8edea, #fed6e3); }
+    .color-6 .city-image-inner { background: linear-gradient(135deg, #cfd9df, #e2ebf0); }
+    .color-7 .city-image-inner { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .color-8 .city-image-inner { background: linear-gradient(135deg, #f093fb, #f5576c); }
+    .color-9 .city-image-inner { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+    .color-10 .city-image-inner { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+
+    .color-1 .city-rank { color: rgba(200,80,50,0.15); }
+    .color-2 .city-rank { color: rgba(50,100,180,0.15); }
+    .color-3 .city-rank { color: rgba(50,140,70,0.15); }
+    .color-4 .city-rank { color: rgba(180,80,20,0.15); }
+    .color-5 .city-rank { color: rgba(150,80,130,0.15); }
+    .color-6 .city-rank { color: rgba(80,100,120,0.15); }
+    .color-7 .city-rank { color: rgba(80,70,160,0.15); }
+    .color-8 .city-rank { color: rgba(180,50,80,0.15); }
+    .color-9 .city-rank { color: rgba(30,100,180,0.15); }
+    .color-10 .city-rank { color: rgba(30,140,100,0.15); }
+
+    @media (max-width: 768px) {
+      .city-card, .city-card:nth-child(even) {
+        grid-template-columns: 1fr;
+        direction: ltr;
+        gap: 2rem;
+      }
+
+      .hero-title { font-size: clamp(2.5rem, 12vw, 4rem); }
+      .city-name { font-size: 1.8rem; }
+      .city-rank { font-size: 3rem; }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-noise"></div>
+    <div class="hero-content">
+      <p class="hero-eyebrow">2025 夏季出行指南</p>
+      <h1 class="hero-title">中国夏季旅游<br><span class="accent-word">Top 10</span></h1>
+      <p class="hero-sub">逃离热浪，寻一方清凉。这十座城市，是中国夏天最值得奔赴的目的地。</p>
+    </div>
+    <div class="scroll-hint">
+      <div class="arrow"></div>
+      <span>向下探索</span>
+    </div>
+  </section>
+
+  <div class="intro">
+    <p>夏日炎炎，何以解暑？<strong>这十座中国城市</strong>，有的被森林覆盖，有的被雪山环绕，有的湖泊澄澈、有的海岸绵长。它们共同的特点是——<strong>夏天平均气温不超过28°C</strong>，风景绝美，攻略完备。是时候收拾行囊，向清凉出发了。</p>
+  </div>
+
+  <div class="city-list">
+
+    <!-- 01 -->
+    <article class="city-card color-1">
+      <div class="city-image">
+        <span class="city-rank" data-label="TOP 01">01</span>
+        <div class="city-image-inner">
+          <span style="font-size:5rem">🏔️</span>
         </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+      </div>
+      <div class="city-info">
+        <div class="city-header">
+          <h2 class="city-name">贵阳</h2>
+          <span class="city-location">📍 贵州省</span>
+          <span class="temp-badge">🌡️ 22–28°C</span>
         </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
+        <p class="city-desc">贵阳被群山环抱，森林覆盖率高达55%，是名副其实的「林城」。夏季均温23°C，凉快到晚上睡觉还要盖被子。黔灵山公园弘福寺香火旺盛，花溪夜郎谷奇石嶙峋，青岩古镇石板街泛着光阴的包浆。</p>
+        <div class="city-tags">
+          <span class="tag">森林城市</span>
+          <span class="tag">山地公园</span>
+          <span class="tag">溶洞奇观</span>
+          <span class="tag">酸辣美食</span>
         </div>
-    </section>
+        <ul class="city-highlights">
+          <li>黔灵山公园——弘福寺撞钟，猕猴讨食，与自然零距离</li>
+          <li>青岩古镇——明清石巷，卤猪脚配玫瑰糖，冰粉解暑一绝</li>
+          <li>黄果树瀑布——亚洲第一大瀑布，水帘洞穿行，湿身也值得</li>
+          <li>南江大峡谷——漂流胜地，碧水青山，刺激与清凉同步</li>
+        </ul>
+      </div>
+    </article>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+    <div class="divider"><span>✦</span></div>
+
+    <!-- 02 -->
+    <article class="city-card color-2">
+      <div class="city-image">
+        <span class="city-rank" data-label="TOP 02">02</span>
+        <div class="city-image-inner">
+          <span style="font-size:5rem">🌊</span>
         </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
+      </div>
+      <div class="city-info">
+        <div class="city-header">
+          <h2 class="city-name">青岛</h2>
+          <span class="city-location">📍 山东省</span>
+          <span class="temp-badge">🌡️ 22–27°C</span>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
+        <p class="city-desc">红瓦绿树，碧海蓝天。青岛的夏天是沿海城市的天花板——崂山云海日出，金沙滩浪花拍岸，百年栈桥直通大海。喝一袋原浆啤酒，啃一只油焖大虾，德式建筑在路边静静矗立，恍惚间以为身在欧洲。</p>
+        <div class="city-tags">
+          <span class="tag">海滨度假</span>
+          <span class="tag">啤酒之城</span>
+          <span class="tag">德式建筑</span>
+          <span class="tag">海鲜盛宴</span>
         </div>
-    </footer>
+        <ul class="city-highlights">
+          <li>栈桥——百年地标，回澜阁听涛，看潮起潮落</li>
+          <li>崂山——道教名山，海上第一仙山，云海日出令人窒息</li>
+          <li>金沙滩——细沙绵延，帆船训练基地，海上运动天堂</li>
+          <li>八大关——万国建筑博览会，拍照超出片，漫步老城区</li>
+          <li>营口路海鲜市场——买海鲜找代加工，原浆啤酒配海肠捞饭</li>
+        </ul>
+      </div>
+    </article>
 
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
+    <div class="divider"><span>✦</span></div>
 
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
+    <!-- 03 -->
+    <article class="city-card color-3">
+      <div class="city-image">
+        <span class="city-rank" data-label="TOP 03">03</span>
+        <div class="city-image-inner">
+          <span style="font-size:5rem">🌲</span>
+        </div>
+      </div>
+      <div class="city-info">
+        <div class="city-header">
+          <h2 class="city-name">昆明</h2>
+          <span class="city-location">📍 云南省</span>
+          <span class="temp-badge">🌡️ 18–26°C</span>
+        </div>
+        <p class="city-desc">昆明四季如春，夏无酷暑，冬无严寒，年平均气温16°C。「春城」之名不是浪得——滇池睡美人倒映，云南大学梧桐夹道，翠湖红嘴鸥低旋。石林九乡溶洞群世界罕见，世博园异木奇花争艳。</p>
+        <div class="city-tags">
+          <span class="tag">春城</span>
+          <span class="tag">高原湖泊</span>
+          <span class="tag">花卉王国</span>
+          <span class="tag">民族风情</span>
+        </div>
+        <ul class="city-highlights">
+          <li>滇池——西山龙门远眺，海埂大坝喂红嘴鸥，乘游船览湖光山色</li>
+          <li>石林——世界地质公园，喀斯特地貌奇观，「阿诗玛」的故乡</li>
+          <li>翠湖公园——市中心绿肺，夏日荷花满塘，市民休闲首选</li>
+          <li>云南民族村——26个少数民族村寨，一天看遍云南多元文化</li>
+          <li>斗南花市——亚洲最大鲜花市场，10元买一捧玫瑰，幸福很简单</li>
+        </ul>
+      </div>
+    </article>
+
+    <div class="divider"><span>✦</span></div>
+
+    <!-- 04 -->
+    <article class="city-card color-4">
+      <div class="city-image">
+        <span class="city-rank" data-label="TOP 04">04</span>
+        <div class="city-image-inner">
+          <span style="font-size:5rem">❄️</span>
+        </div>
+      </div>
+      <div class="city-info">
+        <div class="city-header">
+          <h2 class="city-name">丽江</h2>
+          <span class="city-location">📍 云南省</span>
+          <span class="temp-badge">🌡️ 15–25°C</span>
+        </div>
+        <p class="city-desc">丽江是高原上的一颗明珠，夏天最高温度不过26°C。古城小桥流水人家，玉龙雪山之巅终年积雪，蓝月谷湖水蓝得像调色盘。纳西古乐在古城上空回荡，东巴文化神秘悠远。</p>
+        <div class="city-tags">
+          <span class="tag">古城</span>
+          <span class="tag">雪山</span>
+          <span class="tag">纳西文化</span>
+          <span class="tag">高原草甸</span>
+        </div>
+        <ul class="city-highlights">
+          <li>丽江古城——世界文化遗产，木府风云，大水车旁听流水</li>
+          <li>玉龙雪山——乘冰川大索道上4506米，亲触千年冰川</li>
+          <li>蓝月谷——湖水碧蓝如宝石，拍照无需滤镜</li>
+          <li>泸沽湖——高原明珠，摩梭走婚文化，划猪槽船看日出</li>
+          <li>束河古镇——比丽江古城更安静，马帮文化遗址，茶马古道重镇</li>
+        </ul>
+      </div>
+    </article>
+
+    <div class="divider"><span>✦</span></div>
+
+    <!-- 05 -->
+    <article class="city-card color-5">
+      <div class="city-image">
+        <span class="city-rank" data-label="TOP 05">05</span>
+        <div class="city-image-inner">
+          <span style="font-size:5rem">🏖️</span>
+        </div>
+      </div>
+      <div class="city-info">
+        <div class="city-header">
+          <h2 class="city-name">厦门</h2>
+          <span class="city-location">📍 福建省</span>
+          <span class="temp-badge">🌡️ 26–33°C</span>
+        </div>
+        <p class="city-desc">厦门是中国最文艺的滨海城市，鼓浪屿万国建筑博览，环岛路椰风树影，曾厝垵小吃一条街灯火通明。夏天虽然热，但海风拂面，沙茶面飘香，文艺与烟火气在这里完美融合。</p>
+        <div class="city-tags">
+          <span class="tag">海岛文艺</span>
+          <span class="tag">世界遗产</span>
+          <span class="tag">闽南小吃</span>
+          <span class="tag">浪漫咖啡</span>
+        </div>
+        <ul class="city-highlights">
+          <li>鼓浪屿——世界遗产，万国建筑，钢琴之岛，龙头路逛吃</li>
+          <li>环岛路——中国最美海岸线之一，骑行、拍照、发呆</li>
+          <li>南普陀寺——千年古刹，素饼香甜，素斋远近闻名</li>
+          <li>厦门大学——最美大学之一，芙蓉隧道涂鸦，厦大白城沙滩</li>
+          <li>八市——老厦门烟火气，海鲜吃到扶墙出</li>
+        </ul>
+      </div>
+    </article>
+
+    <div class="divider"><span>✦</span></div>
+
+    <!-- 06 -->
+    <article class="city-card color-6">
+      <div class="city-image">
+        <span class="city-rank" data-label="TOP 06">06</span>
+        <div class="city-image-inner">
+          <span style="font-size:5rem">🏞️</span>
+        </div>
+      </div>
+      <div class="city-info">
+        <div class="city-header">
+          <h2 class="city-name">张家界</h2>
+          <span class="city-location">📍 湖南省</span>
+          <span class="temp-badge">🌡️ 20–28°C</span>
+        </div>
+        <p class="city-desc">张家界是中国山水画的原型，阿凡达悬浮山实景取景地。三千奇峰拔地而起，八百溪流蜿蜒曲折。天门山玻璃栈道脚下是万丈深渊，黄龙洞钟乳石在灯光下如梦似幻。</p>
+        <div class="city-tags">
+          <span class="tag">世界地质公园</span>
+          <span class="tag">奇峰怪石</span>
+          <span class="tag">玻璃栈道</span>
+          <span class="tag">溶洞</span>
+        </div>
+        <ul class="city-highlights">
+          <li>武陵源——世界自然遗产，「三千奇峰，八百秀水」</li>
+          <li>天门山——天门洞罕见，穿山电梯直达山顶，玻璃栈道挑战心跳</li>
+          <li>黄龙洞——亚洲最大溶洞，洞中有河，船游其中如入地下宫殿</li>
+          <li>大峡谷玻璃桥——世界最长玻璃桥，全长430米，俯瞰峡谷幽深</li>
+          <li>金鹰卡通乐园——体验土家文化，品尝三下锅，住景区山居</li>
+        </ul>
+      </div>
+    </article>
+
+    <div class="divider"><span>✦</span></div>
+
+    <!-- 07 -->
+    <article class="city-card color-7">
+      <div class="city-image">
+        <span class="city-rank" data-label="TOP 07">07</span>
+        <div class="city-image-inner">
+          <span style="font-size:5rem">🗻</span>
+        </div>
+      </div>
+      <div class="city-info">
+        <div class="city-header">
+          <h2 class="city-name">秦皇岛</h2>
+          <span class="city-location">📍 河北省</span>
+          <span class="temp-badge">🌡️ 21–28°C</span>
+        </div>
+        <p class="city-desc">秦皇岛是华北最近的蔚蓝海岸，因秦始皇东巡得名。夏天平均气温24°C，北戴河是老牌避暑胜地，山海关长城在此入海。阿那亚礼堂孤独又浪漫，鸽子窝日出美到失语。</p>
+        <div class="city-tags">
+          <span class="tag">海滨避暑</span>
+          <span class="tag">长城入海</span>
+          <span class="tag">艺术社区</span>
+          <span class="tag">日出观鸟</span>
+        </div>
+        <ul class="city-highlights">
+          <li>北戴河——老牌避暑圣地，浅水湾游泳，鸽子窝看日出</li>
+          <li>山海关——万里长城第一关，「两京锁钥无双地」</li>
+          <li>阿那亚——孤独图书馆+礼堂，艺术与海的完美融合</li>
+          <li>老龙头——长城唯一入海处，看长城跃入大海的壮观</li>
+          <li>碧螺塔酒吧公园——夜生活丰富，海上音乐派对，热气球体验</li>
+        </ul>
+      </div>
+    </article>
+
+    <div class="divider"><span>✦</span></div>
+
+    <!-- 08 -->
+    <article class="city-card color-8">
+      <div class="city-image">
+        <span class="city-rank" data-label="TOP 08">08</span>
+        <div class="city-image-inner">
+          <span style="font-size:5rem">🌿</span>
+        </div>
+      </div>
+      <div class="city-info">
+        <div class="city-header">
+          <h2 class="city-name">伊春</h2>
+          <span class="city-location">📍 黑龙江省</span>
+          <span class="temp-badge">🌡️ 18–28°C</span>
+        </div>
+        <p class="city-desc">伊春藏在小兴安岭腹地，森林覆盖率高达83%，是中国最大的森林城市。夏天平均气温20°C左右，空气中负氧离子爆表，是洗肺圣地。红松原始林浩瀚无边，汤旺河林海奇石嶙峋。</p>
+        <div class="city-tags">
+          <span class="tag">森林洗肺</span>
+          <span class="tag">红松原始林</span>
+          <span class="tag">边境风光</span>
+          <span class="tag">漂流</span>
+        </div>
+        <ul class="city-highlights">
+          <li>五营国家森林公园——亚洲最大红松林，天赐湖碧波荡漾</li>
+          <li>汤旺河林海奇石——花岗岩石林，生态绝佳，空气甜如蜜</li>
+          <li>嘉荫恐龙国家地质公园——恐龙化石遗址，黑龙江畔风光</li>
+          <li>茅兰沟国家森林公园——北方小九寨，峡谷流水，幽深静谧</li>
+          <li>林都特産——蓝莓、山蘑菇、野生鱼，林下经济丰富</li>
+        </ul>
+      </div>
+    </article>
+
+    <div class="divider"><span>✦</span></div>
+
+    <!-- 09 -->
+    <article class="city-card color-9">
+      <div class="city-image">
+        <span class="city-rank" data-label="TOP 09">09</span>
+        <div class="city-image-inner">
+          <span style="font-size:5rem">🛶</span>
+        </div>
+      </div>
+      <div class="city-info">
+        <div class="city-header">
+          <h2 class="city-name">桂林</h2>
+          <span class="city-location">📍 广西壮族自治区</span>
+          <span class="temp-badge">🌡️ 25–32°C</span>
+        </div>
+        <p class="city-desc">桂林山水甲天下，夏天是游览漓江的最佳时节。竹筏漂流杨堤至兴坪，九马画山数马趣，阳朔西街异国风情浓郁。象鼻山伏波山叠彩山市区即可登顶，芦笛岩洞中世界晶莹璀璨。</p>
+        <div class="city-tags">
+          <span class="tag">山水甲天下</span>
+          <span class="tag">漓江漂流</span>
+          <span class="tag">喀斯特地貌</span>
+          <span class="tag">阳朔西街</span>
+        </div>
+        <ul class="city-highlights">
+          <li>漓江竹筏——杨堤至兴坪段，20元人民币背景取景地</li>
+          <li>阳朔西街——1400年历史，中西合璧，夜生活丰富</li>
+          <li>遇龙河漂流——双人竹筏，静静划过田园山水</li>
+          <li>芦笛岩——国宾洞，钟乳石奇观，灯光秀梦幻</li>
+          <li>龙脊梯田——农耕奇观，平安寨金坑，住宿看日出</li>
+        </ul>
+      </div>
+    </article>
+
+    <div class="divider"><span>✦</span></div>
+
+    <!-- 10 -->
+    <article class="city-card color-10">
+      <div class="city-image">
+        <span class="city-rank" data-label="TOP 10">10</span>
+        <div class="city-image-inner">
+          <span style="font-size:5rem">🌤️</span>
+        </div>
+      </div>
+      <div class="city-info">
+        <div class="city-header">
+          <h2 class="city-name">西宁</h2>
+          <span class="city-location">📍 青海省</span>
+          <span class="temp-badge">🌡️ 15–28°C</span>
+        </div>
+        <p class="city-desc">西宁是青藏高原的门户，夏天均温仅17°C，凉爽得如同内陆的秋天。塔尔寺酥油花神圣庄严，青海湖环湖，油菜花海铺满湖畔。茶卡盐湖天空之境倒映天光，可可西里近在咫尺。</p>
+        <div class="city-tags">
+          <span class="tag">高原清凉</span>
+          <span class="tag">青海湖</span>
+          <span class="tag">天空之境</span>
+          <span class="tag">藏传佛教</span>
+        </div>
+        <ul class="city-highlights">
+          <li>青海湖——中国最大内陆湖，油菜花海，环湖骑行，震撼心灵</li>
+          <li>塔尔寺——藏传佛教圣地，酥油花、堆绣、壁画「三绝」</li>
+          <li>茶卡盐湖——天空之境，乘小火车穿湖心，倒影如梦</li>
+          <li>可可西里——生命禁区，藏羚羊栖息地，高原精灵</li>
+          <li>金银滩草原——王洛宾《在那遥远的地方》创作地</li>
+        </ul>
+      </div>
+    </article>
+
+  </div>
+
+  <footer class="footer">
+    <div class="footer-logo">中国夏季旅游 Top 10</div>
+    <p>愿你拥有清凉而美好的夏天 🌿</p>
+    <p style="margin-top:1rem; opacity:0.4;">© 2025 · 出行前请关注各地天气预报与景区限流公告</p>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          const delay = entry.target.dataset.index * 0.1 || 0;
+          setTimeout(() => {
+            entry.target.classList.add('visible');
+          }, delay * 1000);
+          observer.unobserve(entry.target);
         }
+      });
+    }, { threshold: 0.15 });
 
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
+    document.querySelectorAll('.city-card').forEach((card, i) => {
+      card.dataset.index = i;
+      observer.observe(card);
+    });
+  </script>
 
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
 </body>
-
 </html>
